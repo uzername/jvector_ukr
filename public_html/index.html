@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ukraine JVectorMap</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="jquery-jvectormap-2.0.2.css" type="text/css" />
+        <script src="js/lib/jquery-2.1.3.min.js"></script>
+        <script src="js/lib/jquery-jvectormap-2.0.2.min.js"></script>
+    </head>
+    <body>
+        <script src="js/ukr_jvectormap_data.js"></script>
+            <script>                //detailing ukrdata
+                var semanticOblastCodes2 = [
+                     'Одеська', 
+                     'Миколаївська', 
+                     'Херсонська', 
+                     'Волинська', 
+                     'Рівненська', 
+                     'Львівська', 
+                     'Закарпатська', 
+                     'Тернопільська', 
+                     'Хмельницька', 
+                     'Житомирська', 
+                     'Чернівецька', 
+                     'Вінницька', 
+                     'Київська', 
+                     'Чернігівська', 
+                     'Сумська', 
+                     'Черкаська',
+                     'Полтавська', 
+                     'Кіровоградська', 
+                     'Дніпропетровська', 
+                     'Івано-Франківська', 
+                     'Запорізька',
+                     'Харківська', 
+                     'Луганська', 
+                     'Донецька', 
+                     'АР Крим'
+                    ];
+                    var mycntr=0;
+                for (var itm=0; itm<semanticOblastCodes2.length; itm++) {
+                    ukrdata["paths"]["id"+mycntr]["name"]=semanticOblastCodes2[itm];
+                    mycntr++;
+                }
+            </script>
+        <script src="js/ukr_jvectormap.js"></script>
+        <div id="ukr-map" style="width: 600px; height: 400px"></div>
+        <script>
+          $(function(){
+            $('#ukr-map').vectorMap({map:"ukrmap", 
+                regionsSelectable: true,
+                regionsSelectableOne: true,
+                regionStyle: {
+                    initial: {
+                      fill: '#B8E186'
+                    },
+                    selected: {
+                      fill: 'yellow'
+                    }
+                },
+                onRegionClick: function(event, code){
+                        document.getElementById("region_info").innerHTML=ukrdata["paths"][code]["name"];
+                      }
+                });
+          });
+        </script>
+        <div id="region_info"> 
+        
+        </div>
+</body>
+</html>
